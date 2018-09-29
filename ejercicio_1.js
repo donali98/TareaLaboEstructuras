@@ -10,6 +10,7 @@ class Tienda{
                 stock:10
             }
         ];
+        this.ventas = [];
     }
     agregarProducto(
             descripcion='producto',
@@ -52,9 +53,22 @@ class Tienda{
                 return 'Propiedad dada no valida';
         }
     }
+    vender(codigo=1,cantidad=2){
+        let item = this.productos.find(ele => ele.codigo == codigo);
+        this.ventas.push(
+            {
+                codigo:codigo,
+                cantidad:cantidad,
+                total:cantidad*item.precioVenta
+            }
+        );
+        item.stock-=cantidad;
+    }
     
 }
 var tienda = new Tienda();
 tienda.agregarProducto();
 tienda.modificarProducto();
+tienda.vender();
 console.log(tienda.productos);
+console.log(tienda.ventas);
