@@ -14,7 +14,7 @@ class Tienda{
     agregarProducto(
             descripcion='producto',
             tipoProducto='generico',
-            precioCompra= -1,
+            precioCompra= 0.15,
              precioVenta = 0.25){                 
         if(
             !(typeof(descripcion) == 'string') || 
@@ -34,9 +34,27 @@ class Tienda{
             )
         }
     }
+    modificarProducto(codigo=1,propiedad = 'descripcion',nuevoValor='algo'){
+        let item = this.productos.find(ele => ele.codigo == codigo);
+        switch(propiedad){
+            case 'descripcion':
+                item.descripcion = nuevoValor;
+            break;
+            case 'tipoProducto':
+                item.tipoProducto = nuevoValor;
+            case 'precioCompra':
+                item.precioCompra = nuevoValor;
+            break;
+            case 'precioVenta':
+                item.precioVenta = nuevoValor;
+            break;
+            default:
+                return 'Propiedad dada no valida';
+        }
+    }
     
 }
 var tienda = new Tienda();
 tienda.agregarProducto();
+tienda.modificarProducto();
 console.log(tienda.productos);
-
