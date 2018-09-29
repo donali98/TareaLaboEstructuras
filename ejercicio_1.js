@@ -22,8 +22,13 @@ class Tienda{
                     let nuevoValor = prompt('Ingrese el nuevo valor de la propiedad');
                     alert(this.modificarProducto(codigo,propiedad,nuevoValor));
                     console.log(this.productos);
-
                 break;
+                case '3':
+                    let code = prompt('Ingrese el codigo del producto a vender');
+                    let cantidad = prompt('Ingrese la cantidad de productos a vender');
+                    alert(this.vender(code,cantidad));
+                    console.log(this.productos);
+                break;                   
             }
         }        
     }
@@ -88,6 +93,7 @@ class Tienda{
             }
         );
         item.stock-=cantidad;
+        return "Venta realizada exitosamente";
     }
     mostrarStockCero(){
         let nuevo = [];
