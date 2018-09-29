@@ -5,8 +5,8 @@ class Tienda{
     }
     menu(){
         let op = 10;
-        while(op!=5){
-            op = prompt('Ingrese una opcion:\n 1-Agregar producto\n 2-Modificar Informacion\n 3-Vender\n 4-Mostrar Stock 0\n 5-Salir' );
+        while(op!=6){
+            op = prompt('Ingrese una opcion:\n 1-Agregar producto\n 2-Modificar Informacion\n 3-Vender\n 4-Mostrar Stock 0\n 5-Promedio Ventas\n 6-Salir' );
             switch(op){
                 case '1':
                     let descripcion = prompt('Ingrese la descripcion del producto nuevo');
@@ -28,7 +28,14 @@ class Tienda{
                     let cantidad = prompt('Ingrese la cantidad de productos a vender');
                     alert(this.vender(code,cantidad));
                     console.log(this.productos);
-                break;                   
+                break;
+                case '4':
+                    console.log(this.mostrarStockCero());                    
+                    alert('Ver consola');                    
+                break;         
+                case '5':
+                    alert(this.promedio());
+                break;          
             }
         }        
     }
@@ -102,13 +109,14 @@ class Tienda{
         });
         return nuevo;
     }
+    promedio(){
+        let totalDinero = 0;
+        this.ventas.forEach((ele)=>{
+            totalDinero+=ele.total;
+        });        
+        totalDinero= totalDinero/this.ventas.length;
+        return(`El promedio de ventas es de ${totalDinero}`);
+    }
 }
 var tienda = new Tienda();
 tienda.menu();
-// tienda.agregarProducto();
-// tienda.modificarProducto();
-// tienda.vender(1,10);
-// tienda.vender(2,10)
-// console.log(tienda.productos);
-// console.log(tienda.mostrarStockCero());
-// console.log(tienda.ventas);
