@@ -16,11 +16,13 @@ class Tienda{
             descripcion='producto',
             tipoProducto='generico',
             precioCompra= 0.15,
-             precioVenta = 0.25){                 
+            precioVenta = 0.25,
+            stock= 10){                 
         if(
             !(typeof(descripcion) == 'string') || 
             !(typeof(tipoProducto)=='string') ||
             !(typeof(precioCompra) == 'number')||
+            !(typeof(stock) == 'number')||
             !(typeof(precioVenta) == 'number') ) return 'Dato/s ingresado/s no validos'
         else if(precioCompra<0 || precioVenta<0) return 'No pueden haber precios negativos';
         else{
@@ -30,7 +32,8 @@ class Tienda{
                     descripcion:descripcion,
                     tipoProducto:tipoProducto,
                     precioCompra:precioCompra,
-                    precioVenta:precioVenta
+                    precioVenta:precioVenta,
+                    stock:stock
                 }
             )
         }
@@ -53,7 +56,7 @@ class Tienda{
                 return 'Propiedad dada no valida';
         }
     }
-    vender(codigo=1,cantidad=2){
+    vender(codigo=1,cantidad=10){
         let item = this.productos.find(ele => ele.codigo == codigo);
         this.ventas.push(
             {
@@ -64,11 +67,21 @@ class Tienda{
         );
         item.stock-=cantidad;
     }
-    
+    mostrarStockCero(){
+        let nuevo = [];
+        this.productos.forEach((ele)=>{
+            if(ele.stock == 0) nuevo.push(ele);
+        });
+        return nuevo;
+    }
 }
 var tienda = new Tienda();
 tienda.agregarProducto();
 tienda.modificarProducto();
-tienda.vender();
+tienda.vender(1,10);
+tienda.vender(2,10);
+
 console.log(tienda.productos);
-console.log(tienda.ventas);
+// console.log(tienda.mostrarStockCero());
+
+// console.log(tienda.ventas);
