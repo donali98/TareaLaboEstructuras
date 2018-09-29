@@ -1,16 +1,25 @@
 class Tienda{
     constructor(){
-        this.productos = [
-            {
-                codigo:1,
-                descripcion: 'Chocovito',
-                tipoProducto:'Alimento Indispensable',
-                precioCompra:0.15,
-                precioVenta:0.25,
-                stock:10
-            }
-        ];
+        this.productos = [];
         this.ventas = [];
+    }
+    menu(){
+        let op = 10;
+        while(op!=5){
+            op = prompt('Ingrese una opcion:\n 1-Agregar producto\n 2-Modificar Informacion\n 3-Vender\n 4-Mostrar Stock 0\n 5-Salir' );
+            switch(op){
+                case '1':
+                    let descripcion = prompt('Ingrese la descripcion del producto nuevo');
+                    let tipoProducto = prompt('Ingrese el tipo del producto nuevo');
+                    let precioCompra =  Number(prompt('Ingrese el precio de compra del producto nuevo'));
+                    let precioVenta = Number(prompt('Ingrese el precio de venta del producto nuevo'));
+                    let stock = parseInt(prompt('Ingrese el stock del producto nuevo'));
+                    alert(this.agregarProducto(descripcion,tipoProducto,precioCompra,precioVenta,stock));
+                    console.log(this.productos);
+                    
+                break;
+            }
+        }        
     }
     agregarProducto(
             descripcion='producto',
@@ -23,7 +32,10 @@ class Tienda{
             !(typeof(tipoProducto)=='string') ||
             !(typeof(precioCompra) == 'number')||
             !(typeof(stock) == 'number')||
-            !(typeof(precioVenta) == 'number') ) return 'Dato/s ingresado/s no validos'
+            !(typeof(precioVenta) == 'number')||
+            isNaN(precioCompra)||
+            isNaN(precioVenta)||
+            isNaN(stock) ) return 'Dato/s ingresado/s no validos'
         else if(precioCompra<0 || precioVenta<0) return 'No pueden haber precios negativos';
         else{
             this.productos.push(
@@ -36,6 +48,7 @@ class Tienda{
                     stock:stock
                 }
             )
+            return 'Producto agregado exitosamente';
         }
     }
     modificarProducto(codigo=1,propiedad = 'descripcion',nuevoValor='algo'){
@@ -76,12 +89,11 @@ class Tienda{
     }
 }
 var tienda = new Tienda();
-tienda.agregarProducto();
-tienda.modificarProducto();
-tienda.vender(1,10);
-tienda.vender(2,10);
-
-console.log(tienda.productos);
+tienda.menu();
+// tienda.agregarProducto();
+// tienda.modificarProducto();
+// tienda.vender(1,10);
+// tienda.vender(2,10)
+// console.log(tienda.productos);
 // console.log(tienda.mostrarStockCero());
-
 // console.log(tienda.ventas);
