@@ -15,8 +15,14 @@ class Tienda{
                     let precioVenta = Number(prompt('Ingrese el precio de venta del producto nuevo'));
                     let stock = parseInt(prompt('Ingrese el stock del producto nuevo'));
                     alert(this.agregarProducto(descripcion,tipoProducto,precioCompra,precioVenta,stock));
+                    break;
+                case '2':
+                    let codigo = prompt('Ingrese el codigo del producto a modificar');
+                    let propiedad = prompt('Ingrese la propiedad a modificar');
+                    let nuevoValor = prompt('Ingrese el nuevo valor de la propiedad');
+                    alert(this.modificarProducto(codigo,propiedad,nuevoValor));
                     console.log(this.productos);
-                    
+
                 break;
             }
         }        
@@ -56,15 +62,18 @@ class Tienda{
         switch(propiedad){
             case 'descripcion':
                 item.descripcion = nuevoValor;
-            break;
-            case 'tipoProducto':
+            return 'Elemento modificado exitosamente';
+                case 'tipoProducto':
                 item.tipoProducto = nuevoValor;
+            return 'Elemento modificado exitosamente';
+            
             case 'precioCompra':
                 item.precioCompra = nuevoValor;
-            break;
+            return 'Elemento modificado exitosamente';
             case 'precioVenta':
                 item.precioVenta = nuevoValor;
-            break;
+            return 'Elemento modificado exitosamente';
+            
             default:
                 return 'Propiedad dada no valida';
         }
